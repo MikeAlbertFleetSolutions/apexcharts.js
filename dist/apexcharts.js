@@ -127,6 +127,19 @@
     return _setPrototypeOf(o, p);
   }
 
+  function _isNativeReflectConstruct() {
+    if (typeof Reflect === "undefined" || !Reflect.construct) return false;
+    if (Reflect.construct.sham) return false;
+    if (typeof Proxy === "function") return true;
+
+    try {
+      Date.prototype.toString.call(Reflect.construct(Date, [], function () {}));
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
   function _assertThisInitialized(self) {
     if (self === void 0) {
       throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
@@ -143,24 +156,54 @@
     return _assertThisInitialized(self);
   }
 
+  function _createSuper(Derived) {
+    return function () {
+      var Super = _getPrototypeOf(Derived),
+          result;
+
+      if (_isNativeReflectConstruct()) {
+        var NewTarget = _getPrototypeOf(this).constructor;
+
+        result = Reflect.construct(Super, arguments, NewTarget);
+      } else {
+        result = Super.apply(this, arguments);
+      }
+
+      return _possibleConstructorReturn(this, result);
+    };
+  }
+
   function _toConsumableArray(arr) {
-    return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread();
+    return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();
   }
 
   function _arrayWithoutHoles(arr) {
-    if (Array.isArray(arr)) {
-      for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) arr2[i] = arr[i];
-
-      return arr2;
-    }
+    if (Array.isArray(arr)) return _arrayLikeToArray(arr);
   }
 
   function _iterableToArray(iter) {
-    if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);
+    if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter);
+  }
+
+  function _unsupportedIterableToArray(o, minLen) {
+    if (!o) return;
+    if (typeof o === "string") return _arrayLikeToArray(o, minLen);
+    var n = Object.prototype.toString.call(o).slice(8, -1);
+    if (n === "Object" && o.constructor) n = o.constructor.name;
+    if (n === "Map" || n === "Set") return Array.from(n);
+    if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
+  }
+
+  function _arrayLikeToArray(arr, len) {
+    if (len == null || len > arr.length) len = arr.length;
+
+    for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
+
+    return arr2;
   }
 
   function _nonIterableSpread() {
-    throw new TypeError("Invalid attempt to spread non-iterable instance");
+    throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
   }
 
   /*
@@ -1342,6 +1385,7 @@
           el.node.addEventListener('mouseenter', this.pathMouseEnter.bind(this, el));
           el.node.addEventListener('mouseleave', this.pathMouseLeave.bind(this, el));
           el.node.addEventListener('mousedown', this.pathMouseDown.bind(this, el));
+          el.node.addEventListener('touchstart', this.pathMouseDown.bind(this, el));
         }
 
         el.attr({
@@ -7042,10 +7086,12 @@
   var RangeBar = /*#__PURE__*/function (_Bar) {
     _inherits(RangeBar, _Bar);
 
+    var _super = _createSuper(RangeBar);
+
     function RangeBar() {
       _classCallCheck(this, RangeBar);
 
-      return _possibleConstructorReturn(this, _getPrototypeOf(RangeBar).apply(this, arguments));
+      return _super.apply(this, arguments);
     }
 
     _createClass(RangeBar, [{
@@ -15640,12 +15686,14 @@
   var ZoomPanSelection = /*#__PURE__*/function (_Toolbar) {
     _inherits(ZoomPanSelection, _Toolbar);
 
+    var _super = _createSuper(ZoomPanSelection);
+
     function ZoomPanSelection(ctx) {
       var _this;
 
       _classCallCheck(this, ZoomPanSelection);
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(ZoomPanSelection).call(this, ctx));
+      _this = _super.call(this, ctx);
       _this.ctx = ctx;
       _this.w = ctx.w;
       _this.dragged = false;
@@ -18798,10 +18846,12 @@
   var BarStacked = /*#__PURE__*/function (_Bar) {
     _inherits(BarStacked, _Bar);
 
+    var _super = _createSuper(BarStacked);
+
     function BarStacked() {
       _classCallCheck(this, BarStacked);
 
-      return _possibleConstructorReturn(this, _getPrototypeOf(BarStacked).apply(this, arguments));
+      return _super.apply(this, arguments);
     }
 
     _createClass(BarStacked, [{
@@ -19258,10 +19308,12 @@
   var CandleStick = /*#__PURE__*/function (_Bar) {
     _inherits(CandleStick, _Bar);
 
+    var _super = _createSuper(CandleStick);
+
     function CandleStick() {
       _classCallCheck(this, CandleStick);
 
-      return _possibleConstructorReturn(this, _getPrototypeOf(CandleStick).apply(this, arguments));
+      return _super.apply(this, arguments);
     }
 
     _createClass(CandleStick, [{
@@ -20253,12 +20305,14 @@
   var Radial = /*#__PURE__*/function (_Pie) {
     _inherits(Radial, _Pie);
 
+    var _super = _createSuper(Radial);
+
     function Radial(ctx) {
       var _this;
 
       _classCallCheck(this, Radial);
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(Radial).call(this, ctx));
+      _this = _super.call(this, ctx);
       _this.ctx = ctx;
       _this.w = ctx.w;
       _this.animBeginArr = [0];
@@ -26747,7 +26801,7 @@
               that.put(new SVG.MergeNode(this));
           });
         }
-        else{
+        else {
           //if the first argument is an array use it
           if(Array.isArray(arguments[0]))
             children = arguments[0];
@@ -27022,7 +27076,7 @@
           // when the last block had no bounding box we simply take the first M we got
           if(bbox.height == 0 || bbox.width == 0){
             startOffsetM =  startArr.push(startArr[0]) - 1;
-          }else{
+          }else {
             // we take the middle of the bbox instead when we got one
             startOffsetM = startArr.push( ['M', bbox.x + bbox.width/2, bbox.y + bbox.height/2 ] ) - 1;
           }
@@ -27034,7 +27088,7 @@
 
           if(bbox.height == 0 || bbox.width == 0){
             destOffsetM =  destArr.push(destArr[0]) - 1;
-          }else{
+          }else {
             destOffsetM =  destArr.push( ['M', bbox.x + bbox.width/2, bbox.y + bbox.height/2 ] ) - 1;
           }
         }
