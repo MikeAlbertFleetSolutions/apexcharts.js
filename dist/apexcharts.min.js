@@ -1,5 +1,5 @@
 /*!
- * ApexCharts v3.18.1-fix-touchstart
+ * ApexCharts v3.18.2
  * (c) 2018-2020 Juned Chhipa
  * Released under the MIT License.
  */
