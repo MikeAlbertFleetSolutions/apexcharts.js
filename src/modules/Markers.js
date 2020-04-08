@@ -203,7 +203,7 @@ export default class Markers {
     circle.node.addEventListener(
       'touchstart',
       graphics.pathMouseDown.bind(this.ctx, circle),
-      { passive: true }
+      { passive: false }
     )
   }
 

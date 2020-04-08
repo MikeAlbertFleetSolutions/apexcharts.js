@@ -4702,7 +4702,7 @@
         circle.node.addEventListener('click', w.config.markers.onClick);
         circle.node.addEventListener('dblclick', w.config.markers.onDblClick);
         circle.node.addEventListener('touchstart', graphics.pathMouseDown.bind(this.ctx, circle), {
-          passive: true
+          passive: false
         });
       }
     }, {
