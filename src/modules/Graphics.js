@@ -279,7 +279,6 @@ class Graphics {
       el.node.addEventListener('mouseenter', this.pathMouseEnter.bind(this, el))
       el.node.addEventListener('mouseleave', this.pathMouseLeave.bind(this, el))
       el.node.addEventListener('mousedown', this.pathMouseDown.bind(this, el))
-      el.node.addEventListener('touchstart', this.pathMouseDown.bind(this, el))
     }
 
     el.attr({
