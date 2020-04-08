@@ -405,6 +405,10 @@ class Pie {
       'mousedown',
       graphics.pathMouseDown.bind(this, elPath)
     )
+    elPath.node.addEventListener(
+      'touchstart',
+      graphics.pathMouseDown.bind(this, elPath)
+    )
 
     if (!this.donutDataLabels.total.showAlways) {
       elPath.node.addEventListener(
