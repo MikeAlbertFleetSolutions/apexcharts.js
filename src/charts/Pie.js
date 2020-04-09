@@ -406,7 +406,7 @@ class Pie {
       graphics.pathMouseDown.bind(this, elPath)
     )
     elPath.node.addEventListener(
-      'touchstart',
+      'touchend',
       graphics.pathMouseDown.bind(this, elPath)
     )
 
