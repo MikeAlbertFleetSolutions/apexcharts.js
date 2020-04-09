@@ -270,7 +270,7 @@ class Pie {
           this.centerX,
           this.centerY,
           w.globals.radialSize / 1.25 +
-          w.config.plotOptions.pie.dataLabels.offset,
+            w.config.plotOptions.pie.dataLabels.offset,
           startAngle + (endAngle - startAngle) / 2
         )
       } else if (this.chartType === 'donut') {
@@ -278,7 +278,7 @@ class Pie {
           this.centerX,
           this.centerY,
           (w.globals.radialSize + this.donutSize) / 2 +
-          w.config.plotOptions.pie.dataLabels.offset,
+            w.config.plotOptions.pie.dataLabels.offset,
           startAngle + (endAngle - startAngle) / 2
         )
       }
@@ -340,7 +340,7 @@ class Pie {
         if (
           angle !== 0 &&
           w.config.plotOptions.pie.dataLabels.minAngleToShowLabel <
-          sectorAngleArr[i]
+            sectorAngleArr[i]
         ) {
           let formatter = w.config.dataLabels.formatter
           if (formatter !== undefined) {
@@ -487,7 +487,7 @@ class Pie {
 
     if (opts.dur !== 0) {
       el.animate(opts.dur, w.globals.easing, opts.animBeginArr[opts.i])
-        .afterAll(function () {
+        .afterAll(function() {
           if (
             me.chartType === 'pie' ||
             me.chartType === 'donut' ||
@@ -716,8 +716,8 @@ class Pie {
         const yLabel = helpers.drawYAxisTexts(
           this.centerX,
           this.centerY -
-          circleSize +
-          parseInt(w.config.yaxis[0].labels.style.fontSize, 10) / 2,
+            circleSize +
+            parseInt(w.config.yaxis[0].labels.style.fontSize, 10) / 2,
           i,
           yTexts[i]
         )
@@ -742,7 +742,7 @@ class Pie {
       class: 'apexcharts-datalabels-group',
       transform: `translate(${opts.translateX ? opts.translateX : 0}, ${
         opts.translateY ? opts.translateY : 0
-        }) scale(${w.config.plotOptions.pie.customScale})`
+      }) scale(${w.config.plotOptions.pie.customScale})`
     })
 
     const showTotal = dataLabelsConfig.total.show
