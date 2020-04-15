@@ -4,7 +4,7 @@
 
 class Utils {
   static bind(fn, me) {
-    return function() {
+    return function () {
       return fn.apply(me, arguments)
     }
   }
@@ -28,8 +28,8 @@ class Utils {
   // credit: http://stackoverflow.com/questions/27936772/deep-object-merging-in-es6-es7#answer-34749873
   static extend(target, source) {
     if (typeof Object.assign !== 'function') {
-      ;(function() {
-        Object.assign = function(target) {
+      ; (function () {
+        Object.assign = function (target) {
           'use strict'
           // We must check against these specific cases.
           if (target === undefined || target === null) {
@@ -217,9 +217,9 @@ class Utils {
     )
     return rgb && rgb.length === 4
       ? '#' +
-          ('0' + parseInt(rgb[1], 10).toString(16)).slice(-2) +
-          ('0' + parseInt(rgb[2], 10).toString(16)).slice(-2) +
-          ('0' + parseInt(rgb[3], 10).toString(16)).slice(-2)
+      ('0' + parseInt(rgb[1], 10).toString(16)).slice(-2) +
+      ('0' + parseInt(rgb[2], 10).toString(16)).slice(-2) +
+      ('0' + parseInt(rgb[3], 10).toString(16)).slice(-2)
       : ''
   }
 
@@ -335,6 +335,10 @@ class Utils {
 
   static isFloat(n) {
     return Number(n) === n && n % 1 !== 0
+  }
+
+  static isIOS() {
+    return navigator.userAgent.match(/ipad|iphone/i);
   }
 
   static isSafari() {
