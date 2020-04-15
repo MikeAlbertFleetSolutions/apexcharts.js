@@ -566,6 +566,11 @@
         return Number(n) === n && n % 1 !== 0;
       }
     }, {
+      key: "isIOS",
+      value: function isIOS() {
+        return navigator.userAgent.match(/ipad|iphone/i);
+      }
+    }, {
       key: "isSafari",
       value: function isSafari() {
         return /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
@@ -14192,7 +14197,10 @@
         elPath.node.addEventListener('mouseleave', graphics.pathMouseLeave.bind(this, elPath));
         elPath.node.addEventListener('mouseleave', this.revertDataLabelsInner.bind(this, elPath.node, dataLabels));
         elPath.node.addEventListener('mousedown', graphics.pathMouseDown.bind(this, elPath));
-        elPath.node.addEventListener('touchend', graphics.pathMouseDown.bind(this, elPath));
+
+        if (Utils.isIOS()) {
+          elPath.node.addEventListener('touchend', graphics.pathMouseDown.bind(this, elPath));
+        }
 
         if (!this.donutDataLabels.total.showAlways) {
           elPath.node.addEventListener('mouseenter', this.printDataLabelsInner.bind(this, elPath.node, dataLabels));
